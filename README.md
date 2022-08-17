@@ -27,7 +27,7 @@ Make note of the appId, display_name, password, and tenant.
 
 Terraform tracks state locally via the terraform.tfstate file. This pattern works well in a single-person environment. However, in a more practical multi-person environment, we need to track state on the server using a remote storage. We will use Azure storage account with a storage container to store the terraform state. It nativaly contains data-protection (recovery, versioning) and redundancy. Data stored there is encrypted before being persisted. When needed, Terraform retrieves the state from the backend and stores it in local memory. Using this pattern, state is never written to your local disk.
 
-I have written a manifest to provision the backend using Terraform. Note that it will create a local state file as we still don't have a proper remote backend.
+I have written a manifest to provision the backend using Terraform. It will create a resource group, a storage account with a blob container. Note that it will create a local state file as we still don't have a proper remote backend.
 
 Repository structure:
 [Remote Backend](./terraform/backend/create-remote-storage.tf)

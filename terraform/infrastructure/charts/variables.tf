@@ -3,6 +3,10 @@ variable "namespace" {
     type        = string
     default     = "test-app"
 }
+variable "storage_account_name" {
+    description = "Remote backend name"
+    type        = string
+}
 variable "db_name" {
     description = "Postgresql database name"
     type        = string
