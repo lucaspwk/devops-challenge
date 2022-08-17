@@ -108,14 +108,17 @@ A helm chart was created from scratch using the built-in container image from a 
 
 DB sensitive data is stored in secrets and mapped as environment variables on pod.
 
-## Release process
+
+## TODO 
+
+### Release process
 
 A CI process would start into repository with a pushing code. It should trigger a pipeline to test the integrated code, security code test, etc. If all passed, merge code and built a new container image with new tag and push to a container registry. 
-For a CD process, it would start testing this new image in a test environment and perform tests. If the deploys is successfull we can deploy to production. Kubernetes deployments can use Rolling Update policy, that permits a zero downtime deployment by incrementally updating pods instances with new ones. In association with health checks, we should not suffer any outage downtime and the service will turn the traffic when the new pod is ready.
+For a CD process, it would start testing this new image in a test environment and execute validation tests. If the deploys is successfull we can deploy to production. Kubernetes deployments can use Rolling Update policy, that permits a zero downtime deployment by incrementally updating pods instances with new ones. In association with health checks, we should not suffer any outage downtime and the service will turn the traffic when the new pod is ready.
 
-## Monitoring
+### Monitoring
 
-For stack selected is Prometheus to polling metrics endpoints, Alertmanager as the alerting layer of the stack, Grafana as data visualisation with dashboards and graphs and node-exporter to collect data on cluster nodes and provides OS an hardware metrics. The installation is based on Prometheus Operator
+The stack selected is Prometheus to polling metrics endpoints, Alertmanager as the alerting layer of the stack, Grafana as data visualisation with dashboards and graphs and node-exporter to collect data on cluster nodes and provides OS an hardware metrics. The installation would use Prometheus operator to deploy the entire infrastructure.
 
 
 
