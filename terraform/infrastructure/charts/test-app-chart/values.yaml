@@ -1,0 +1,70 @@
+replicaCount: ${replicas}
+
+image:
+  repository: faceitregistry.azurecr.io/test-app
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets: 
+  - name: acr-secret
+nameOverride: "test-app"
+fullnameOverride: "test-app"
+
+serviceAccount: {}
+
+securityContext: 
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress: {}
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - test-app
+      topologyKey: kubernetes.io/hostname
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - test-app
+        topologyKey: kubernetes.io/hostname
+
+# Secrets
+POSTGRESQL_HOST: postgresql-primary
+POSTGRESQL_PORT: 5432
+POSTGRESQL_USER: ${db_username}
+POSTGRESQL_PASSWORD: ${db_password}
+POSTGRESQL_DBNAME: ${db_name}
