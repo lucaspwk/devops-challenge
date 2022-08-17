@@ -49,11 +49,11 @@ azure/faceit-challenge/app.tfstate - AKS applications and related resources
 Ensuring high availability of deployments is a must for enterprise workloads. Kubernetes cluster is deployed using 3 availability zones providing high availability and application resiliency by distributing worker nodes across multiple zones within a single region. It protects resources from data center-level failures by distributing them across one or more data centers in an Azure region. 
 Network space is designed to have a subnet for worker nodes pool and different internal subnets for PODs and services.
 
-![Cluster](images/cluster.png "CLUSTER")
+![Cluster](images/cluster.PNG "CLUSTER")
 
 Also, AKS uses cluster autoscaler component to watch for pods that can't be scheduled because of resource constraints and increase the number of worker nodes in the node pool automatically and decrease when it is not needed anymore. For PODs, kubernetes supports horizontal pod autoscaling to adjust the number of pods in a deployment depending on resource utilization or other select metrics.
 
-![Scale](images/scale.png "SCALE")
+![Scale](images/scale.PNG "SCALE")
 
 # Infrastructure deployment
 
@@ -98,7 +98,7 @@ az aks Get-Credentials --resource-group faceit-rg --name faceit-aks --file ~/.ku
 # Application deployment
 Application deployments are done using helm charts to make easier the deployment of all needed kubernetes resources for each application. All application's related are deployed into a namespace and only comunication between internal components will be allowed, except DNS traffic with kube-system namespace.
 
-![Cluster](images/network-pol.png "CLUSTER")
+![Cluster](images/network-pol.PNG "CLUSTER")
 
 ## PostgreSQL
 The installation uses the official helm chart and the instance is configured with replication architecture model using read-only replicas. Horizontal POD autoscalling is defined for PostgreSQL-primary and read-only Pods based on CPU Utilization percentage. Database parameters are included as terraform sensitive variables. 
