@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "ns" {
   metadata {
-    name = "test-app"
+    name  = "test-app"
   }
 }
 
